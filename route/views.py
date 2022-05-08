@@ -6,7 +6,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
 from route.permissions import IsManagerUser,IsMerchandiserUser
 from route.models import Manager, Merchandiser
-
+from django.utils.translation import gettext_lazy as _
 
 from .models import  Merchandiser,Manager,Comment, Address
 from .serializer import MerchandiserSerializer,ManagerSerializer,RouteSerializer
