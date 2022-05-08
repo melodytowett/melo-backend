@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from django.utils.translation import gettext_lazy as _
 from route .models import Manager,Merchandiser,User,Address
-from rest_auth.registration.serializers import RegisterSerializer
 from django.contrib.auth import authenticate
 
 class UserSerializer(serializers.ModelSerializer):
