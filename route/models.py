@@ -54,7 +54,7 @@ class Manager(models.Model):
     location = PlainLocationField(based_fields=['city'], zoom=7,blank=True,null=True)
 
     def __str__(self):
-        return str(self.user.user)
+        return str(self.user.username)
 
 
     # def save_manager(self):
