@@ -1,3 +1,4 @@
+from importlib_resources import contents
 from route.serializer import ManagerSignupSerializer,MerchandiserSignupSerializer,UserSerializer
 from rest_framework import generics,status,permissions
 from rest_framework.response import Response
@@ -16,8 +17,15 @@ from .permissions import IsAdminOrReadOnly
 # Create your views here.
 
 class MerchandiserSignupView(generics.GenericAPIView):
+    queryset = Merchandiser.objects.all()
     serializer_class =MerchandiserSignupSerializer
-    
+    def get(self,request,format=None):
+        content = {
+            'user':str(request.user),
+            'auth':str(request.auth),
+        }
+        return Response(content)
+        
     def post(self,request,*args,**kwargs):
         serializer=self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -33,6 +41,12 @@ class MerchandiserSignupView(generics.GenericAPIView):
 class ManagerSignupView(generics.GenericAPIView):
     serializer_class = ManagerSignupSerializer
     queryset = Manager.objects.all()
+    def get(self,request,format=None):
+        content = {
+            'user':str(request.user),
+            'auth':str(request.auth),
+        }
+        return Response(content)
 
     def post(self,request,*args,**kwargs):
         serializer=self.get_serializer(data=request.data)
@@ -44,6 +58,7 @@ class ManagerSignupView(generics.GenericAPIView):
             'message':'account succesfully created'
         })
 class CustomAuthToken(ObtainAuthToken):
+
     def post(self,request,*args,**kwargs):
         serializer=self.serializer_class(data=request.data,context={'request':request})
         serializer.is_valid(raise_exception=True)

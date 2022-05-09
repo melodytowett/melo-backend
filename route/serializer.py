@@ -49,7 +49,7 @@ class ManagerSignupSerializer(serializers.ModelSerializer):
         extra_kwargs={
             'password':{'write_only':True}
         }
-  
+ 
     def save(self, **kwargs):
             user=User(
                 username=self.validated_data['username'],
@@ -64,8 +64,6 @@ class ManagerSignupSerializer(serializers.ModelSerializer):
             user.save()
             Manager.objects.create(user=user)
             return user
-    
-
 
 class MerchandiserSerializer(serializers.ModelSerializer):
     class Meta:

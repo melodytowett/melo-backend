@@ -10,10 +10,7 @@ from django.contrib.auth import get_user_model
 from location_field.models.plain import PlainLocationField
 from rest_framework.authtoken.models import Token
 
-
-
 # Create your models here.
-
 
 
 class User(AbstractUser):
@@ -41,7 +38,7 @@ class Merchandiser(models.Model):
     location = PlainLocationField(based_fields=['city'], zoom=7,blank=True,null=True)
 
     def __str__(self):
-        return str(self.user.username)
+        return str(self.user)
 
     def save_merch(self):
         self.save()
@@ -54,8 +51,7 @@ class Manager(models.Model):
     location = PlainLocationField(based_fields=['city'], zoom=7,blank=True,null=True)
 
     def __str__(self):
-        return str(self.user.username)
-
+        return str(self.name)
 
     # def save_manager(self):
     #     self.save()
