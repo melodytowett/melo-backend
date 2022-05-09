@@ -20,8 +20,8 @@ from .permissions import IsAdminOrReadOnly
 class MerchandiserSignupView(generics.GenericAPIView):
     queryset = Merchandiser.objects.all()
     serializer_class =MerchandiserSignupSerializer
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # permission_classes = [IsAuthenticated]
     def get(self,request,format=None):
         content = {
             'user':str(request.user),
@@ -44,8 +44,8 @@ class MerchandiserSignupView(generics.GenericAPIView):
 class ManagerSignupView(generics.GenericAPIView):
     queryset = Manager.objects.all()
     serializer_class =ManagerSignupSerializer
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # permission_classes = [IsAuthenticated]
     def get(self,request,format=None):
         content = {
             'user':str(request.user),
