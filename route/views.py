@@ -10,7 +10,7 @@ from route.models import Manager, Merchandiser
 from django.utils.translation import gettext_lazy as _
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .models import  Merchandiser,Manager,Comment, Address
+from .models import  Merchandiser,Manager,Comment, Address, User
 from .serializer import MerchandiserSerializer,ManagerSerializer,RouteSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
@@ -26,6 +26,7 @@ class MerchandiserSignupView(generics.GenericAPIView):
         content = {
             'user':str(request.user),
             'auth':str(request.auth),
+
         }
         return Response(content)
         
@@ -52,7 +53,6 @@ class ManagerSignupView(generics.GenericAPIView):
             'auth':str(request.auth),
         }
         return Response(content)
-  
 
     def post(self,request,*args,**kwargs):
         serializer=self.get_serializer(data=request.data)

@@ -7,8 +7,11 @@ from django.dispatch import receiver
 
 from django.core.validators import RegexValidator
 from django.contrib.auth import get_user_model
+from django.forms import DateField
 from location_field.models.plain import PlainLocationField
 from rest_framework.authtoken.models import Token
+from datetime import datetime
+
 
 # Create your models here.
 
@@ -59,6 +62,7 @@ class Manager(models.Model):
 class Address(models.Model):
     city = models.CharField(max_length=255,blank=True,null=True)
     location = PlainLocationField(based_fields=['city'], zoom=7,blank=True,null=True)
+    date = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
         return self.city
