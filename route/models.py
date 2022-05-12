@@ -17,22 +17,32 @@ from datetime import datetime
 
 
 class User(AbstractUser):
-    is_manager =models.BooleanField(default=False)
-    is_merchandiser =models.BooleanField(default=False)
-    def __str__(self):
-        return self.username
+    # is_manager =models.BooleanField(default=False)
+    # is_merchandiser =models.BooleanField(default=False)
+    # def __str__(self):
+    #     return self.username
 
-    
-    @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-    def create_auth_token(sender, instance=None, created=False, **kwargs):
-        if created:
-            Token.objects.create(user=instance)
+    # @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+    # def create_auth_token(sender, instance=None, created=False, **kwargs):
+    #     if created:
+    #         Token.objects.create(user=instance)
+    name = models.CharField(max_length=100,blank=True,null=True)
+    email = models.CharField(max_length=255, unique=True,blank=True,null=True)
+    password = models.CharField(max_length=255,blank=True,null=True)
+    username = None
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
 
 
 User = get_user_model()
 phone_number_validator = RegexValidator(
     regex=r'^[0-9 \(\)]{10,12}$', message="Phone numbers must begin with +2547.... or 07..."
 )
+
+
+
 class Merchandiser(models.Model):
     user= models.OneToOneField(User,on_delete=models.CASCADE,related_name='merchandiser',blank=True,null=True)
     username = models.CharField(max_length=40,blank=True,null=True)
@@ -56,8 +66,6 @@ class Manager(models.Model):
     def __str__(self):
         return str(self.name)
 
-    # def save_manager(self):
-    #     self.save()
 
 class Address(models.Model):
     city = models.CharField(max_length=255,blank=True,null=True)
